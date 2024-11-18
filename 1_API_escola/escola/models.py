@@ -1,17 +1,6 @@
 from django.db import models
 
-'''
 
-ID
-Nome
-E-mail
-CPF
-Máxima 11 caracteres
-Data de nascimento
-Número de celular
-Máximo de 14 caracteres 
-
-'''
 class Estudante(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(blank=False, max_length=30)
@@ -22,3 +11,15 @@ class Estudante(models.Model):
     def __str__(self):
         return self.nome
     
+class curso(models.Model):
+    NIVEL = (
+        ('B', 'Básico'),
+        ('I','Intermediario'),
+        ('A', 'Avançando')
+    )
+    codigo = models.CharField(max_length=10)
+    descricao = models.CharField(max_length=100, blank=False)
+    nivel = models.CharField(max_length=1,choices=NIVEL, blank=False, null=False, default='B')
+
+    def __str__(self):
+        return self.codigo
