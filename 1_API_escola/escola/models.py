@@ -11,7 +11,7 @@ class Estudante(models.Model):
     def __str__(self):
         return self.nome
     
-class curso(models.Model):
+class Curso(models.Model):
     NIVEL = (
         ('B', 'Básico'),
         ('I','Intermediario'),
@@ -23,3 +23,14 @@ class curso(models.Model):
 
     def __str__(self):
         return self.codigo
+    
+
+class Matricula(models.Model):
+    PERIODO = (
+        ('M','MATUTINO'),
+        ('V','VESPERTINO'),
+        ('N','NOTURNO'),
+    )
+    estudante =  models.ForeignKey(Estudante, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    periodo = models.CharField(max_length=1, choices=PERIODO, blank=False, default='M')
